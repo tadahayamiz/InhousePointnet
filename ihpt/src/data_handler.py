@@ -145,10 +145,10 @@ def generate_subset(
     x_train = x[indices[:size_train]]
     x_test = x[indices[size_train:]]
     if y is None:
-        return x_train, x_test, None, None
+        return x_train, None, x_test, None
     y_train = y[indices[:size_train]]
     y_test = y[indices[size_train:]]
-    return x_train, x_test, y_train, y_test
+    return x_train, y_train, x_test, y_test
 
 
 def prep_dataloader(
@@ -230,7 +230,7 @@ def prep_data(
 
     """
     if x_test is None:
-        x_train, x_test, y_train, y_test = generate_subset(
+        x_train, y_train, x_test, y_test = generate_subset(
             x_train, y_train, ratio, random_seed
             )
     train_tf = transform[0]
