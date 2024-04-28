@@ -53,9 +53,6 @@ class PNDataset(Dataset):
         self.y = y # labels
         self.datanum = len(X)
         self.num_points = num_points
-
-        print(f"X.shape: {X.shape}")
-
         self._indices = list(range(X.shape[1])) # shuffle用
 
 
@@ -197,7 +194,7 @@ def _worker_init_fn(worker_id):
 
 
 def prep_data(
-    x_train:np.array, x_test:np.array=None, y_train:np.array=None, y_test:np.array=None,
+    x_train:np.array, y_train:np.array=None, x_test:np.array=None, y_test:np.array=None,
     num_points:int=256, batch_size:int=32,
     transform=(None, None), shuffle=(True, False),
     num_workers=2, pin_memory=True, ratio:float=0.01,
