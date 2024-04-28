@@ -105,7 +105,7 @@ class Trainer:
             # batchをdeviceへ
             data, label = data.to(self.device), label.to(self.device)
             # 予測
-            output, _ = self.model(data, label)
+            output, _ = self.model(data)
             # # lossの計算
             loss = self.loss_fn(output, label)
             total_loss += loss.item() * len(data)
