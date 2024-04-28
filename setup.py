@@ -6,7 +6,7 @@ with open('requirements.txt') as requirements_file:
 # modify entry_points to use command line 
 # {COMMAND NAME}={module path}:{function in the module}
 setup(
-    name="pnbt",
+    name="ihbt",
     version="0.0.1",
     description="in-house Pointnet",
     author="tadahaya",

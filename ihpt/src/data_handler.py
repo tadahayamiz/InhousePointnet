@@ -21,7 +21,9 @@ class PNDataset(Dataset):
     while the output data should be (samples, coordinates, points) due to conv1d
 
     """
-    def __init__(self, X:np.array, y:np.array=None, num_points, transform=None):
+    def __init__(
+            self, X:np.array, y:np.array=None, num_points:int=None, transform=None
+            ):
         """
         Parameters
         ----------
