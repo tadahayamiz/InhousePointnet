@@ -22,7 +22,7 @@ class Trainer:
                 "weight_decay": 1e-2,
             },
             "loss_fn": {
-                "name": "cross_entropy",
+                "name": "CrossEntropyLoss",
                 "label_smoothing": 0.1,
             },
         }
