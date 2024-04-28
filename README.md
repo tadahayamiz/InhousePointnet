@@ -1,4 +1,4 @@
-# ihbt
+# ihpt
 a repository for in-house Pointnet implementation based on the followings:  
 - [origin](https://arxiv.org/abs/1612.00593)  
 - [torch version](https://github.com/itberrios/3D/tree/main/point_net)  
