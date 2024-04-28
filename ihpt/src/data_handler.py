@@ -51,6 +51,8 @@ class PNDataset(Dataset):
                 self.transform = [transform]
         self.X = X
         self.y = y # labels
+        if y is not None:
+            self.y = torch.from_numpy(y.astype(np.int64))
         self.datanum = len(X)
         self.num_points = num_points
         self._indices = list(range(X.shape[1])) # shuffle用
@@ -71,8 +73,7 @@ class PNDataset(Dataset):
                 data = t(data)
         if self.y is None:
             return data, None
-        label = self.y[idx]
-        label = torch.from_numpy(label.astype(np.uint8))
+        label = self.y[idx] # 既にtensor
         return data, label
 
 
