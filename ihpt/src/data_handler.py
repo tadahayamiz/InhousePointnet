@@ -53,6 +53,9 @@ class PNDataset(Dataset):
         self.y = y # labels
         self.datanum = len(X)
         self.num_points = num_points
+
+        print(f"X.shape: {X.shape}")
+
         self._indices = list(range(X.shape[1])) # shuffle用
 
 
