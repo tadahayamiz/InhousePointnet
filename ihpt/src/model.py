@@ -183,7 +183,7 @@ class PointNetBackbone(nn.Module):
         self.smlp2 = nn.Sequential(
             SharedMLPBlock(64, 64),
             SharedMLPBlock(64, 128),
-            SharedMLPBlock(128, self.dim_global_feats // 2)
+            SharedMLPBlock(128, self.dim_global_feats)
             )
         # max pool to get the global features
         self.max_pool = nn.MaxPool1d(
