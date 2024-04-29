@@ -248,7 +248,7 @@ def prep_data(
             )
         return train_loader, test_loader
     else:
-        test_dataset = prep_dataset(x_test, y_test, num_points, transform[1])
+        test_dataset = prep_dataset(x_train, y_train, num_points, transform[1])
         test_loader = prep_dataloader(
             test_dataset, batch_size, shuffle[1], num_workers, pin_memory
             )
