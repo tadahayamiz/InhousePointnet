@@ -72,7 +72,7 @@ class PNDataset(Dataset):
             for t in self.transform:
                 data = t(data)
         if self.y is None:
-            return data, None
+            return data
         label = self.y[idx] # 既にtensor
         return data, label
 
