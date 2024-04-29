@@ -88,6 +88,20 @@ class IhPointNet:
             )
 
 
+    def evaluate(self, test_loader, exp_name:str=None, base_dir:str=None):
+        """ evaluation """
+        test_losses, accuracies = self.trainer.evaluate(test_loader)
+        # save experiment
+        if exp_name is None:
+            exp_name = "evaluation"
+        if base_dir is None:
+            base_dir = self.config["base_dir"]
+        save_experiment(
+            exp_name, self.config["base_dir"], self.config,
+            self.model, [], test_losses, accuracies
+            )
+
+
     def load_model(self, exp_name, base_dir):
         """
         load model
