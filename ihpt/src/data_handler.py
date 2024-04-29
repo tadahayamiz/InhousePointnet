@@ -252,4 +252,4 @@ def prep_data(
         test_loader = prep_dataloader(
             test_dataset, batch_size, shuffle[1], num_workers, pin_memory
             )
-        return test_loader, _
+        return test_loader, None
