@@ -60,7 +60,10 @@ class IhPointNet:
         self.trainer = Trainer(self.model, self.config)
 
 
-    def prep_data(self, x_train, y_train=None, x_test=None, y_test=None):
+    def prep_data(
+            self, x_train, y_train=None, x_test=None, y_test=None,
+            train:bool=True
+            ):
         """
         data preparation
         
@@ -72,7 +75,8 @@ class IhPointNet:
         """
         train_loader, test_loader = prep_data(
             x_train, y_train, x_test, y_test,
-            num_points=self.config["num_points"], batch_size=self.config["batch_size"]
+            num_points=self.config["num_points"], batch_size=self.config["batch_size"],
+            train=train
             )
         return train_loader, test_loader
 
