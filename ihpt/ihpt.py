@@ -92,6 +92,7 @@ class IhPointNet:
             )
 
 
+    @torch.no_grad()
     def evaluate(self, test_loader, exp_name:str=None, base_dir:str=None):
         """ evaluation """
         test_losses, accuracies = self.trainer.evaluate(test_loader)
@@ -159,9 +160,9 @@ class IhPointNet:
         predictions = []
         probs = []
         indices = []
-        for data, label in testloader:
+        for data in testloader:
             # batchをdeviceへ
-            data, _ = data.to(self.device)
+            data = data.to(self.device)
             # 予測
             output, idx = self.model(data)
             probs.append(output)
