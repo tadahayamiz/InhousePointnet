@@ -42,9 +42,10 @@ def save_experiment(
         json.dump(data, f, sort_keys=True, indent=4)
 
     # plot progress
-    plot_progress(
-        experiment_name, train_losses, test_losses, config["epochs"], base_dir=base_dir
-        )
+    if len(train_losses) > 0 and len(test_losses) > 0:
+        plot_progress(
+            experiment_name, train_losses, test_losses, config["epochs"], base_dir=base_dir
+            )
 
     # save the model
     save_checkpoint(experiment_name, model, "final", base_dir=base_dir)
