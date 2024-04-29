@@ -265,5 +265,6 @@ class PointNetClassHead(nn.Module):
     @torch.no_grad()
     def get_latent(self, x):
         """ get latent features """
+        self.backbone.eval()
         x, ci = self.backbone(x)
         return x.detach(), ci.detach()

@@ -127,9 +127,10 @@ class IhPointNet:
         self.trainer = Trainer(self.model, self.config)
 
 
-    def get_latent(self, X, return_idx=False):
+    @torch.no_grad()
+    def predict(self, X):
         """
-        get latent features, return numpy array
+        predict the class labels
         
         Parameters
         ----------
@@ -138,23 +139,40 @@ class IhPointNet:
                 
         Returns
         -------
-        latent: np.array
-            latent features
+        predictions: np.array
+            predicted class labels
         
+        probs: np.array
+            predicted probabilities
+        
+        indices: np.array
+            critical indices
+                
         """
+        self.model.eval()
         # data loading
-        data_loader, _ = prep_data(
-            X, num_points=self.config["num_points"], batch_size=self.config["batch_size"]
+        testloader, _ = prep_data(
+            X, num_points=self.config["num_points"], batch_size=self.config["batch_size"],
+            train=False
             )
-        latents = []
-        crit_indices = []
-        for data, label in tqdm(data_loader):
-            data = data.to(self.device)
-            z, ci = self.model.get_latent(data)
-            latents.append(z)
-            if return_idx:
-                crit_indices.append(ci)
-        latents = torch.cat(latents, dim=0).cpu().numpy()
-        if return_idx:
-            crit_indices = torch.cat(crit_indices, dim=0).numpy()
-        return latents, crit_indices
+        # prediction
+        predictions = []
+        probs = []
+        indices = []
+        for data, label in testloader:
+            # batchをdeviceへ
+            data, _ = data.to(self.device)
+            # 予測
+            output, idx = self.model(data)
+            probs.append(output)
+            pred = torch.argmax(output, dim=1)
+            predictions.append(pred)
+            indices.append(idx)
+        predictions = torch.cat(predictions, dim=0).cpu().numpy()
+        probs = torch.cat(probs, dim=0).cpu().numpy()
+        return predictions, probs, indices
+
+
+    @torch.no_grad()
+    def get_latent(self, X, return_idx=False):
+        raise NotImplementedError("Not implemented yet")
